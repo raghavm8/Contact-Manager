@@ -11,14 +11,22 @@
         <link th:href="@{/styles/SignInWithGoogle.css}" rel="stylesheet"/>
     </head>
     <body class="dark:bg-gray-900 bg-gray-100 dark:text-white">
-        <div th:replace="Header :: navbar"></div>
+<!--        <div th:replace="Header :: navbar"></div>-->
+        <div th:if="${loggedInUser}">
+            <div data-th-replace="~{user/user_navbar::user-navbar}"></div>
+        </div>
+        <!-- user is not logged : navbar -->
+        <div th:unless="${loggedInUser}">
+            <div data-th-replace="~{navbar :: navbar}"></div>
+        </div>
+
         <div class="p-4">
             <section th:replace="${baseContent}"></section>
         </div>
         <a th:href="@{'/user/dashboard'}">dashboard</a>
         <a th:href="@{'/user/profile'}">profile</a>
         <a th:href="@{'/do-logout'}">logout</a>
-        <footer class="p-4">Footer</footer>
+<!--        <footer class="p-4">Footer</footer>-->
         <script th:src="@{'https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js'}"></script>
         <script th:src="@{'/Scripts/script.ts'}"></script>
     </body>

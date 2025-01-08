@@ -8,10 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Entity(name = "user")
 @Table(name = "user")
@@ -37,25 +35,31 @@ public class User implements UserDetails {
     private String about;
 
     @Getter(AccessLevel.NONE)
+    @Builder.Default
     private boolean enabled = true;
+    @Builder.Default
     private boolean emailVerified = false;
+    @Builder.Default
     private boolean phoneVerified = false;
 
     @Enumerated(value = EnumType.STRING)
+    @Builder.Default
     private Providers provider = Providers.SELF;
     private String providerUserId;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @Builder.Default
     private List<Contact> Contacts = new ArrayList<>();
 
+    @Builder.Default
     @ElementCollection(fetch = FetchType.EAGER)
     private List<Roles> rolesList = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<SimpleGrantedAuthority> roles =
-                rolesList.stream().map((role) -> new SimpleGrantedAuthority(role.toString()))
-                        .collect(Collectors.toList());
+        Collection<SimpleGrantedAuthority> roles = rolesList.stream()
+                .map((role) -> new SimpleGrantedAuthority(role.toString()))
+                .collect(Collectors.toList());
         return roles;
     }
 
@@ -71,19 +75,19 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-//        return UserDetails.super.isAccountNonExpired();
+        // return UserDetails.super.isAccountNonExpired();
         return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-//        return UserDetails.super.isAccountNonLocked();
+        // return UserDetails.super.isAccountNonLocked();
         return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-//        return UserDetails.super.isCredentialsNonExpired();
+        // return UserDetails.super.isCredentialsNonExpired();
         return true;
     }
 
@@ -92,3 +96,5 @@ public class User implements UserDetails {
         return this.enabled;
     }
 }
+
+

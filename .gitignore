@@ -39,3 +39,4 @@ node_modules
 /src/main/resources/static/GitHubCredentials.json
 
 /src/main/resources/application.properties
+/bin/

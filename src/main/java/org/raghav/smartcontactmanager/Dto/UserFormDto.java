@@ -25,8 +25,10 @@ public class UserFormDto {
 
     @NotBlank(message = "Password is required")
     @Size(min = 1, max = 20, message = "Password must be between 6 and 20 characters")
-//    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,20}$",
-//            message = "Password must contain at least one letter, one number, and one special character")
+    // @Pattern(regexp =
+    // "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,20}$",
+    // message = "Password must contain at least one letter, one number, and one
+    // special character")
     private String password;
 
     @Size(max = 200, message = "About section cannot exceed 200 characters")
