@@ -36,7 +36,11 @@ public class UserController {
 
     @GetMapping("/profile")
     public String Profile(Model model, Authentication authentication) {
-
         return "user/profile";
     }
+
+    // todo: create contact
+    // todo: update contact
+    // todo: retrieve contact
+    // todo: delete contact
 }

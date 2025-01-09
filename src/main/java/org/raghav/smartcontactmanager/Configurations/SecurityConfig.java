@@ -17,14 +17,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//
-//        UserDetails user = User.withDefaultPasswordEncoder().username("admin").password("admin123").roles("ADMIN","USER").build();
-//
-//        InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager(user);
-//        return inMemoryUserDetailsManager;
-//    }
+    // @Bean
+    // public UserDetailsService userDetailsService() {
+    //
+    // UserDetails user =
+    // User.withDefaultPasswordEncoder().username("admin").password("admin123").roles("ADMIN","USER").build();
+    //
+    // InMemoryUserDetailsManager inMemoryUserDetailsManager = new
+    // InMemoryUserDetailsManager(user);
+    // return inMemoryUserDetailsManager;
+    // }
 
     private SecurityCustomUserDetailService userDetailsService;
     @Autowired
@@ -38,10 +40,10 @@ public class SecurityConfig {
 
     // configuration for authentication provider
     @Bean
-    public AuthenticationProvider authenticationProvider() {
+    public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setPasswordEncoder(PasswordEncoder());
         return daoAuthenticationProvider;
     }
 
@@ -49,13 +51,14 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
-        // configured the urls to make urls private and public
+
+        // Info: configured the urls to make urls private and public
         httpSecurity.authorizeHttpRequests((authorize) -> {
             authorize.requestMatchers("/user/**").authenticated();
             authorize.anyRequest().permitAll();
         });
 
-        // form default login
+        // Info: form default login
         httpSecurity.formLogin((formLogin) -> {
             formLogin.loginPage("/login");
             formLogin.loginProcessingUrl("/authenticate");
@@ -66,8 +69,8 @@ public class SecurityConfig {
         });
 
         httpSecurity.logout((logoutForm) -> {
-           logoutForm.logoutUrl("/do-logout");
-           logoutForm.logoutSuccessUrl("/login?logout=true");
+            logoutForm.logoutUrl("/do-logout");
+            logoutForm.logoutSuccessUrl("/login?logout=true");
         });
 
         httpSecurity.oauth2Login((oAuth2Login) -> {
@@ -76,13 +79,13 @@ public class SecurityConfig {
             oAuth2Login.failureHandler(oAuthFailureAuthenticationHandler);
         });
 
-//        httpSecurity.oauth2Login(Customizer.withDefaults());
+        // httpSecurity.oauth2Login(Customizer.withDefaults());
 
         return httpSecurity.build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder PasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

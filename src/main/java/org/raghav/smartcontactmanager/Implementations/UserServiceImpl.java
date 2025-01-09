@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(String userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-                
+
         userRepository.deleteById(user.getId());
     }
 
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
     public User updateUser(User user) {
         User user2 = userRepository.findById(user.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        
+
         // Info: update user2 from user
         user2.setName(user.getName());
         user2.setEmail(user.getEmail());
@@ -70,10 +70,10 @@ public class UserServiceImpl implements UserService {
         user2.setPhoneVerified(user.isPhoneVerified());
         user2.setProvider(user.getProvider());
         user2.setProviderUserId(user.getProviderUserId());
-        
+
         // Info: save the user in database
         User savedUser = userRepository.save(user2);
-        
+
         return savedUser;
     }
 

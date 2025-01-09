@@ -32,7 +32,8 @@ public class OAuthSuccessAuthenticationHandler implements AuthenticationSuccessH
     }
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+            Authentication authentication) throws IOException, ServletException {
         logger.info("Authentication success");
         logger.info("onAuthenticationSuccess");
 
@@ -77,7 +78,7 @@ public class OAuthSuccessAuthenticationHandler implements AuthenticationSuccessH
 
         Random random = new Random();
 
-        Long tenDigitNumber = 1000000000L + (long)(random.nextDouble() * 9000000000L);
+        Long tenDigitNumber = 1000000000L + (long) (random.nextDouble() * 9000000000L);
         user.setPhoneNumber(tenDigitNumber.toString());
         user.setPhoneVerified(false);
 

@@ -28,6 +28,7 @@
 
                         <p data-th-if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-red-600 px-1 py-2"></p>
                     </div>
+
                     <!-- email field -->
                     <div class="mb-3">
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
@@ -38,6 +39,7 @@
                                 required/>
                         <p data-th-if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-red-600 px-1 py-2"></p>
                     </div>
+
                     <!-- password field -->
                     <div class="mb-3">
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
@@ -47,6 +49,7 @@
                                 required/>
                         <p data-th-if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-red-600 px-1 py-2"></p>
                     </div>
+
                     <!-- phone field -->
                     <div class="mb-3">
                         <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Number</label>
@@ -67,8 +70,8 @@
 
                         <p data-th-if="${#fields.hasErrors('about')}" th:errors="*{about}" class="text-red-600 px-1 py-2"></p>
                     </div>
+                    
                     <!-- button -->
-
                     <div class="mb-3 flex justify-center space-x-3">
                         <button type="submit" class="px-3 py-2 rounded bg-gray-800 hover:bg-gray text-white dark:bg-blue-800 dark:hover:bg-blue-800">
                             Singup
