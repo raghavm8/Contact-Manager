@@ -5,7 +5,6 @@ import org.raghav.smartcontactmanager.Entities.User;
 import org.raghav.smartcontactmanager.Exceptions.ResourceNotFoundException;
 import org.raghav.smartcontactmanager.Repositories.UserRepository;
 import org.raghav.smartcontactmanager.Services.UserService;
-import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -50,6 +49,7 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(String userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                
         userRepository.deleteById(user.getId());
     }
 
@@ -57,7 +57,8 @@ public class UserServiceImpl implements UserService {
     public User updateUser(User user) {
         User user2 = userRepository.findById(user.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        // update karenge user2 from user
+        
+        // Info: update user2 from user
         user2.setName(user.getName());
         user2.setEmail(user.getEmail());
         user2.setPassword(user.getPassword());
@@ -69,8 +70,10 @@ public class UserServiceImpl implements UserService {
         user2.setPhoneVerified(user.isPhoneVerified());
         user2.setProvider(user.getProvider());
         user2.setProviderUserId(user.getProviderUserId());
-        // save the user in database
+        
+        // Info: save the user in database
         User savedUser = userRepository.save(user2);
+        
         return savedUser;
     }
 

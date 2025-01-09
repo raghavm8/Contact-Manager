@@ -7,12 +7,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Component
 public class SessionHelper {
-    public static void removeMessage(){
+    public static void removeMessage() {
         try {
-            HttpSession session = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession();
+            HttpSession session = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest()
+                    .getSession();
             session.removeAttribute("message");
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
