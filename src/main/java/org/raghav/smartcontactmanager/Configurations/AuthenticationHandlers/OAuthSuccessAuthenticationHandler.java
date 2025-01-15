@@ -58,7 +58,7 @@ public class OAuthSuccessAuthenticationHandler implements AuthenticationSuccessH
             user.setName(oAuthUser.getAttribute("name").toString());
             user.setProviderUserId(oAuthUser.getName());
             user.setProvider(Providers.GOOGLE);
-            user.setAbout("This account is created using google.");
+            user.setAbout("This account is created using Google.");
         } else if (authorizedClientRegistrationId.equalsIgnoreCase(Providers.GITHUB.toString())) {
             String email = oAuthUser.getAttribute("email") != null ? oAuthUser.getAttribute("email").toString()
                     : oAuthUser.getAttribute("login").toString() + "@gmail.com";
@@ -70,14 +70,14 @@ public class OAuthSuccessAuthenticationHandler implements AuthenticationSuccessH
             user.setProfilePic(picture);
             user.setName(name);
             user.setProviderUserId(providerUserId);
-            user.setProvider(Providers.GITHUB);
-            user.setAbout("This account is created using github");
+            user.setProvider(Providers.GITHUB); 
+            user.setAbout("This account is created using Github");
         } else {
             logger.info("Unknown Provider: " + authorizedClientRegistrationId);
         }
 
+        // todo: remove this and make handle phone number of user.
         Random random = new Random();
-
         Long tenDigitNumber = 1000000000L + (long) (random.nextDouble() * 9000000000L);
         user.setPhoneNumber(tenDigitNumber.toString());
         user.setPhoneVerified(false);

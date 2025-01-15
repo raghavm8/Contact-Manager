@@ -50,12 +50,14 @@ public class PageController {
         return "services";
     }
 
+    // Info: returns login page
     @RequestMapping("/login")
     public String loginPage() {
         System.out.println("services page loading");
         return "login";
     }
 
+    //Info: returns page for registeration.
     @RequestMapping("/register")
     public String registerPage(Model model) {
         System.out.println("services page loading");
@@ -70,6 +72,7 @@ public class PageController {
         return "contacts";
     }
 
+    // Info: process registration.
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
     public String processRegister(@Valid @ModelAttribute UserFormDto userFormDto, BindingResult bindingResult, HttpSession session) {
 
